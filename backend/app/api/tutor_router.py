@@ -2,6 +2,7 @@ from fastapi import APIRouter, UploadFile, File, HTTPException
 from fastapi.responses import StreamingResponse
 import whisper # OpenAI Whisper for Speech Recognition
 import logging
+from urllib.parse import quote_plus
 
 from ..core.nlp_engine import get_ai_explanation
 from ..core.speech_synth import generate_speech
@@ -33,7 +34,7 @@ async def handle_query(audio_file: UploadFile = File(...)):
     audio_bytes = await audio_file.read()
     # In a real app, you save the audio_bytes to a temporary file compatible with Whisper.
     # We will use a MOCK result for now to ensure the flow works:
-    user_query = "What is Python language in coding?" # Mock result
+    user_query = "What is Python language in coding? write a python code to print hello world" # Mock result
 
     logging.info(f"Received query: {user_query}")
 
@@ -50,11 +51,12 @@ async def handle_query(audio_file: UploadFile = File(...)):
     log_interaction(user_query, ai_response_text)
 
     # Return the data needed by the frontend to trigger audio and animation
+    safe_text = quote_plus(ai_response_text)
     return {
         "query": user_query,
         "explanation_text": ai_response_text,
         "lip_sync_json": lip_sync_data,
-        "audio_url": f"/api/tutor/audio_stream/?text={ai_response_text}" 
+        "audio_url": f"/api/tutor/audio_stream/?text={safe_text}"
     }
 
 @router.get("/audio_stream/")
