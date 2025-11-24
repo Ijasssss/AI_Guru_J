@@ -34,7 +34,6 @@ def get_ai_explanation(user_query: str) -> str:
         do_sample=True,             
         temperature=0.7,            
         top_k=50,
-        # 'early_stopping' is removed to avoid the warning and potential conflicts
     )
     # --------------------------------------------------------
     
