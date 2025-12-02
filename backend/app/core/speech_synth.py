@@ -5,11 +5,11 @@ import os
 
 logger = logging.getLogger(__name__)
 
-# Voice Mapping
 VOICES = {
-    "male": "en-US-ChristopherNeural", # Deep Male Voice
-    "female": "en-US-AriaNeural"       # Standard Female Voice
+    "male": "en-IN-PrabhatNeural",
+    "female": "en-IN-NeerjaNeural"
 }
+
 
 async def generate_speech(text_to_speak: str, gender: str = "female") -> str:
     """
