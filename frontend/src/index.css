@@ -6,9 +6,25 @@ body, html, #root {
     height: 100%;
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: radial-gradient(circle at center, #c084fc 0%, #7c3aed 100%);
     color: #333;
     overflow: hidden;
+
+    /* --- BACKGROUND DESIGN: VIRTUAL HOLODECK --- */
+    background-color: #1e1b4b; /* Very dark purple base */
+    
+    background-image: 
+        /* 1. The Grid (Thin, subtle tech lines) */
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        
+        /* 2. The Spotlight (Glow behind the avatar/board) */
+        radial-gradient(circle at 50% 40%, rgba(192, 132, 252, 0.8) 0%, rgba(124, 58, 237, 0.6) 40%, rgba(30, 27, 75, 1) 90%);
+
+    /* Grid size (60px squares) and Gradient size (Full screen) */
+    background-size: 60px 60px, 60px 60px, 100% 100%;
+    
+    /* Ensure the background stays fixed if content moves */
+    background-attachment: fixed;
 }
 
 /* --- Main Application Structure --- */
